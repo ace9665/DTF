@@ -12,11 +12,11 @@ clock=pygame.time.Clock()
 
 #Variables
 surf_ground=pygame.Surface([1368,22])
-screen=pygame.display.set_mode((1368,700))
+screen=pygame.display.set_mode((1280,720))
 
 player=pygame.sprite.GroupSingle()
 player.add(Player())
-enemy=pygame.sprite.GroupSingle()
+enemy=pygame.sprite.Group()
 enemy.add(Enemy())
 #Game_Loop
 while True:
@@ -30,6 +30,7 @@ while True:
     player.draw(screen)
     enemy.draw(screen)
     player.update()
+    enemy.update()
 
 
 
