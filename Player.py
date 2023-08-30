@@ -16,8 +16,8 @@ class Player(pygame.sprite.Sprite):
         shoot_left2=  pygame.transform.rotozoom(pygame.image.load("assets/player/shoot/playerLshoot2.png"), 0, 1.1)
     #Shooting_Frames
 
-
-        self.index=int(0)
+        self.i=0
+        self.index=0
         self.image=pygame.image.load("assets/player/walk/playerRwalk1.png")
         self.image=pygame.transform.rotozoom(self.image,0,1.1)
         self.rect=self.image.get_rect(center=(684,475))
@@ -39,6 +39,7 @@ class Player(pygame.sprite.Sprite):
 
     def animation_state(self):
         keys=pygame.key.get_pressed()
+        keyup=pygame.KEYUP
         if keys[pygame.K_RIGHT]:
             self.index+=0.15
             if self.index>=len(self.walk_right): self.index=0
@@ -47,15 +48,17 @@ class Player(pygame.sprite.Sprite):
             self.index += 0.15
             if self.index >= len(self.walk_left): self.index = 0
             self.image = self.walk_left[int(self.index)]
-        if keys[pygame.K_SPACE]:
+        if keys[pygame.K_RIGHT] or keyup==pygame.K_RIGHT:
+            if keys[pygame.K_SPACE]:
+                self.image=self.shoot_right[int(self.i)]
 
-            for self.index in self.walk_right:
-                self.walk_right[int(self.index)]
-            self.walk_right[(self.index)]
+
 
 
 
 
     def update(self):
+        self.i+=1
+        if self.i >= len(self.shoot_right): self.i = 0
         self.player_input()
         self.animation_state()
